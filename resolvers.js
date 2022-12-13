@@ -1,6 +1,16 @@
+import axios from "axios";
 const resolvers = {
   Query: {
-    check: () => "check server",
+    getAllRepos: async () => {
+      let repo = await axios.get(
+        "https://api.github.com/users/Vish-was/repos",
+        {
+          Authorization: "Bearer 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",
+        }
+      );
+
+      return repo.data;
+    },
   },
 };
 
