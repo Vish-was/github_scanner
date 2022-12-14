@@ -1,20 +1,21 @@
 import axios from "axios";
+
 const resolvers = {
   Query: {
     getAllRepos: async () => {
       let repo = await axios.get("https://api.github.com/user/repos", {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: `Bearer ${process.env.USER_TOKEN}`,
         },
       });
       return repo.data;
     },
-    getRepo: async (_, { name }) => {
+    getRepo: async (_, { name, owner }) => {
       let res = await axios.get(
-        `https://api.github.com/repos/${name}/github_scanner`,
+        `https://api.github.com/repos/${owner}/${name}`,
         {
           headers: {
-            Authorization: "Bearer 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",
+            Authorization: `Bearer ${process.env.USER_TOKEN}`,
           },
         }
       );
